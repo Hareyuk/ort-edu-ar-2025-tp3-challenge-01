@@ -24,58 +24,106 @@ import androidx.core.view.WindowInsetsCompat
 import kotlinx.serialization.builtins.serializer
 import java.util.Timer
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 
 class PrimeraActividad : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppContent()
+            MaterialTheme{
+                PantallaWelcome()
+            }
         }
 
-        // Cambiar a XML después de 1.5 segundos
-        Handler(Looper.getMainLooper()).postDelayed({
-            setContentView(R.layout.activity_primera_actividad)
-        }, 1500)
-//        kotlin.concurrent.timer(initialDelay = 1500, period = 3000) {
-//            setContentView(R.layout.activity_primera_actividad)
-//            cancel()
-//        }
-
     }
 }
-@Composable
-fun AppContent() {
-    Column(
-        modifier = Modifier.padding(16.dp), // Add padding for better spacing
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally ) {
-        ImageLogo()
-        GreetPerson("Axel")
-    }
-}
-
-@Composable
-fun GreetPerson(name: String, modifier: Modifier = Modifier)
-{
-    Text(
-        text = "Bienvenido $name!",
-        modifier = modifier,
-        fontSize = 26.sp,
-        color = androidx.compose.ui.graphics.Color.White
-    )
-}
-
 @Preview(showBackground = true, showSystemUi = true, name = "My preview 2")
 @Composable
-fun WelcomePrevewi() {
-    AppContent()
-}
-@Composable
-fun ImageLogo() {
-    val image = painterResource(R.drawable.doggo_adventurer_logo)
-    Image(
-        painter = image,
-        contentDescription = "Logo Doggo Adventurer",
-    )
+fun PantallaWelcome() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+            .padding(top = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        // ImageView → Image
+        Image(
+            painter = painterResource(id = R.drawable.working_pana),
+            contentDescription = stringResource(R.string.welcome_img_content_descr),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(243.dp),
+            contentScale = ContentScale.Fit
+        )
+
+        // LinearLayout vertical → Column
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(182.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            // TextView título
+            Text(
+                text = stringResource(R.string.welcome_title),
+                style = MaterialTheme.typography.headlineMedium, // Tu estilo h1_green
+                color = Color(0xFF4CAF50), // Verde - ajusta el color
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // TextView subtítulo
+            Text(
+                text = stringResource(R.string.welcome_subtitle),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // LinearLayout horizontal → Row
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f), // Equivale a layout_height="match_parent"
+            horizontalArrangement = Arrangement.spacedBy(16.dp) // Espacio entre botones
+        ) {
+
+            // Botón 1
+            Button(
+                onClick = { /* Acción del botón login */ },
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.weight(1f), // Equivale a layout_weight="1"
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50) // Tu estilo btn_green_fill
+                )
+            ) {
+                Text(stringResource(R.string.welcome_btn_login))
+            }
+
+            // Botón 2
+            Button(
+                onClick = { /* Acción del botón signup */ },
+                modifier = Modifier.weight(1f),
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50)
+                )
+            ) {
+                Text(stringResource(R.string.welcome_btn_signup))
+            }
+        }
+    }
 }
