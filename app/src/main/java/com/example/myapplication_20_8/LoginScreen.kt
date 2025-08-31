@@ -5,31 +5,39 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class LoginScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +51,11 @@ class LoginScreen : AppCompatActivity() {
     }
 }
 
-
 @Preview(showBackground = true, showSystemUi = true, name = "My preview 2")
 @Composable
 fun PantallaLogin() {
-    Box(modifier = Modifier.fillMaxSize())
-    {
+    Box(modifier = Modifier.fillMaxSize()) {
+
         Image(
             painter = painterResource(id = R.drawable.design_backgorund),
             contentDescription = "Imagen de fondo",
@@ -59,76 +66,193 @@ fun PantallaLogin() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .fillMaxWidth()
                 .padding(24.dp)
                 .padding(top = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // ImageView → Image
-            Image(
-                painter = painterResource(id = R.drawable.working_pana),
-                contentDescription = stringResource(R.string.welcome_img_content_descr),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(243.dp),
-                contentScale = ContentScale.Fit
-            )
-
-            // LinearLayout vertical → Column
+            // Títulos
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(182.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                // TextView título
                 Text(
-                    text = stringResource(R.string.welcome_title),
-                    style = MaterialTheme.typography.headlineMedium, // Tu estilo h1_green
-                    color = Color(0xFF4CAF50), // Verde - ajusta el color
+                    text = stringResource(R.string.login_title),
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = Color(0xFF4CAF50),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                // TextView subtítulo
                 Text(
-                    text = stringResource(R.string.welcome_subtitle),
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.fillMaxWidth()
+                    text = stringResource(R.string.login_subtitle),
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
                 )
             }
 
-            // LinearLayout horizontal → Row
-            Row(
+            // Inputs
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                var email by remember { mutableStateOf("") }
+                var password by remember { mutableStateOf("") }
+
+                TextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text(stringResource(R.string.login_input_email)) },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color(0xFFF8FFFA),
+                        unfocusedContainerColor = Color(0xFFF8FFFA),
+                        disabledContainerColor = Color(0xFFF8FFFA),
+                        focusedIndicatorColor = Color(0xFF2E7D32),
+                        unfocusedIndicatorColor = Color(0xFF4CAF50),
+                        cursorColor = Color(0xFF2E7D32)
+                    )
+                )
+
+                TextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text(stringResource(R.string.login_input_password)) },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color(0xFFF8FFFA),
+                        unfocusedContainerColor = Color(0xFFF8FFFA),
+                        disabledContainerColor = Color(0xFFF8FFFA),
+                        focusedIndicatorColor = Color(0xFF2E7D32),
+                        unfocusedIndicatorColor = Color(0xFF4CAF50),
+                        cursorColor = Color(0xFF2E7D32)
+                    )
+                )
+            }
+
+            Text(
+                text = stringResource(R.string.login_btn_forgot_password),
+                color = Color(0xFF2196F3), // Azul como enlace
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f), // Equivale a layout_height="match_parent"
-                horizontalArrangement = Arrangement.spacedBy(16.dp) // Espacio entre botones
-            ) {
+                    .clickable {
+                        // Acción cuando hacen click
+                        // Por ejemplo: navegar a otra pantalla
+                    }
+                    .padding(8.dp),
+                //textDecoration = TextDecoration.Underline // Subrayado como enlace
+                textAlign = TextAlign.Right
+            )
 
-                // Botón 1
+            // Botones
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Button(
                     onClick = { /* Acción del botón login */ },
                     shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f), // Equivale a layout_weight="1"
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50) // Tu estilo btn_green_fill
-                    )
-                ) {
-                    Text(stringResource(R.string.welcome_btn_login))
-                }
-
-                // Botón 2
-                Button(
-                    onClick = { /* Acción del botón signup */ },
                     modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF4CAF50)
                     )
                 ) {
-                    Text(stringResource(R.string.welcome_btn_signup))
+                    Text(stringResource(R.string.login_btn_signin))
+                }
+            }
+
+            Text(
+                text = stringResource(R.string.login_btn_create_account),
+                color = Color(0xFF777777),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        // Acción cuando hacen click
+                        // Por ejemplo: navegar a otra pantalla
+                    }
+                    .padding(8.dp),
+                //textDecoration = TextDecoration.Underline // Subrayado como enlace
+                textAlign = TextAlign.Center
+            )
+
+            Text(
+                text = stringResource(R.string.login_txt_info),
+                color = Color(0xFF66da7f),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                textAlign = TextAlign.Center
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
+            ) {
+
+                // Botón 1
+                Button(
+                    onClick = { /* Acción botón 1 */ },
+                    modifier = Modifier
+                        .size(60.dp, 50.dp), // Tamaño cuadrado fijo
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF4CAF50)
+                    ),
+                    contentPadding = PaddingValues(0.dp) // Sin padding interno
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_google), // Tu imagen
+                        contentDescription = "Descripción",
+                        modifier = Modifier.size(25.dp), // Tamaño del ícono
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
+                }
+
+                // Botón 2
+                Button(
+                    onClick = { /* Acción botón 2 */ },
+                    modifier = Modifier.size(60.dp, 50.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF4CAF50)
+                    ),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_facebook),
+                        contentDescription = "Descripción",
+                        modifier = Modifier.size(25.dp),
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
+                }
+
+                // Botón 3
+                Button(
+                    onClick = { /* Acción botón 3 */ },
+                    modifier = Modifier.size(60.dp, 50.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF4CAF50)
+                    ),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_apple),
+                        contentDescription = "Descripción",
+                        modifier = Modifier.size(25.dp),
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
                 }
             }
         }
