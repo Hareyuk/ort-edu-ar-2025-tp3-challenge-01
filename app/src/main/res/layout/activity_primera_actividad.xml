@@ -35,7 +35,10 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/welcome_title" />
+                android:text="@string/welcome_title"
+                style="@style/h1_green"
+                android:textAlignment="center"
+                />
 
             <TextView
                 android:id="@+id/textView2"
@@ -54,13 +57,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/btn_green_fill"
                 android:text="@string/welcome_btn_login" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/btn_green_fill"
                 android:text="@string/welcome_btn_signup" />
         </LinearLayout>
     </LinearLayout>

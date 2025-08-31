@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="btn_green_fill" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">#66da7f</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="h1_green" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#66da7f</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
