@@ -9,15 +9,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -30,13 +25,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myapplication_20_8.componentes.BotonLineaImagen
+import com.example.myapplication_20_8.components.BotonVerde
 
 class LoginScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,18 +151,13 @@ fun PantallaLogin() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Button(
-                    onClick = { /* Acción del botón login */ },
-                    shape = RoundedCornerShape(8.dp),
+                BotonVerde(
+                    texto = stringResource(R.string.login_btn_signin),
                     modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    )
-                ) {
-                    Text(stringResource(R.string.login_btn_signin))
-                }
+                    onClick = { }
+                )
             }
 
             Text(
@@ -196,63 +187,27 @@ fun PantallaLogin() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
             ) {
 
-                // Botón 1
-                Button(
-                    onClick = { /* Acción botón 1 */ },
-                    modifier = Modifier
-                        .size(60.dp, 50.dp), // Tamaño cuadrado fijo
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    ),
-                    contentPadding = PaddingValues(0.dp) // Sin padding interno
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.icon_google), // Tu imagen
-                        contentDescription = "Descripción",
-                        modifier = Modifier.size(25.dp), // Tamaño del ícono
-                        colorFilter = ColorFilter.tint(Color.White)
-                    )
-                }
+                BotonLineaImagen(
+                    iconoId = R.drawable.icon_google,
+                    contentDescription = "Login con Google",
+                    onClick = { /* Acción Google */ }
+                )
 
-                // Botón 2
-                Button(
-                    onClick = { /* Acción botón 2 */ },
-                    modifier = Modifier.size(60.dp, 50.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    ),
-                    contentPadding = PaddingValues(0.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.icon_facebook),
-                        contentDescription = "Descripción",
-                        modifier = Modifier.size(25.dp),
-                        colorFilter = ColorFilter.tint(Color.White)
-                    )
-                }
+                BotonLineaImagen(
+                    iconoId = R.drawable.icon_facebook,
+                    contentDescription = "Login con Facebook",
+                    onClick = { /* Acción Google */ }
+                )
 
-                // Botón 3
-                Button(
-                    onClick = { /* Acción botón 3 */ },
-                    modifier = Modifier.size(60.dp, 50.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    ),
-                    contentPadding = PaddingValues(0.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.icon_apple),
-                        contentDescription = "Descripción",
-                        modifier = Modifier.size(25.dp),
-                        colorFilter = ColorFilter.tint(Color.White)
-                    )
-                }
+                BotonLineaImagen(
+                    iconoId = R.drawable.icon_apple,
+                    contentDescription = "Login con Apple",
+                    onClick = { /* Acción Google */ }
+                )
+
             }
         }
     }
