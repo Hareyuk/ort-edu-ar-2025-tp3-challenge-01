@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.myapplication_20_8.components.BotonVerde
 
 class SignUpScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -168,16 +169,11 @@ fun PantallaRegistro() {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Button(
-                    onClick = { /* Acción del botón login */ },
-                    shape = RoundedCornerShape(8.dp),
+                BotonVerde(
+                    texto = stringResource(R.string.signup_btn_signup),
                     modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    )
-                ) {
-                    Text(stringResource(R.string.signup_btn_signup))
-                }
+                    onClick = { }
+                )
             }
 
             Text(
