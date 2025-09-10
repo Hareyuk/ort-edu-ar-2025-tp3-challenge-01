@@ -1,5 +1,6 @@
 package com.example.myapplication_20_8
 
+import android.R.attr.onClick
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -34,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.myapplication_20_8.components.BotonVerde
 
 class PrimeraActividad : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,30 +111,17 @@ fun PantallaWelcome() {
                     .weight(1f), // Equivale a layout_height="match_parent"
                 horizontalArrangement = Arrangement.spacedBy(16.dp) // Espacio entre botones
             ) {
-
-                // Botón 1
-                Button(
-                    onClick = { /* Acción del botón login */ },
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f), // Equivale a layout_weight="1"
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50) // Tu estilo btn_green_fill
-                    )
-                ) {
-                    Text(stringResource(R.string.welcome_btn_login))
-                }
-
-                // Botón 2
-                Button(
-                    onClick = { /* Acción del botón signup */ },
+                BotonVerde(
+                    texto = stringResource(R.string.welcome_btn_login),
                     modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
-                    )
-                ) {
-                    Text(stringResource(R.string.welcome_btn_signup))
-                }
+                    onClick = { }
+                )
+
+                BotonVerde(
+                    texto = stringResource(R.string.welcome_btn_signup),
+                    modifier = Modifier.weight(1f),
+                    onClick = { }
+                )
             }
         }
     }

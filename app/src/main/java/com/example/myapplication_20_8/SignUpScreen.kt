@@ -223,7 +223,7 @@ fun PantallaRegistro() {
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_google), // Tu imagen
-                        contentDescription = "Descripción",
+                        contentDescription = "Icon Google",
                         modifier = Modifier.size(25.dp), // Tamaño del ícono
                         colorFilter = ColorFilter.tint(Color.White)
                     )
