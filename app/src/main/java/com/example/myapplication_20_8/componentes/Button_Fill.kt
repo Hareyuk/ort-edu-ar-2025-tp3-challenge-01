@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.myapplication_20_8.PoppinsFamily
 
 @Composable
 fun BotonVerde(
@@ -24,6 +25,6 @@ fun BotonVerde(
             containerColor = Color(0xFF4CAF50)
         )
     ) {
-        Text(texto)
+        Text(texto, fontFamily = PoppinsFamily)
     }
 }
